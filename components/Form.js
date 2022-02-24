@@ -2,25 +2,29 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import React from 'react';
 
-export default function form() {
-  
+export default function form(props) {
+  const {setNombre, setEdad, setPeso, setAltura} = props;
   return (
     <View style={styles.viewForm}>
       <View style={styles.viewInput}>
           <TextInput placeholder='Nombre' 
           style={styles.input}
+          onChange={(e)=>setNombre(e.nativeEvent.text)}
           />
           <TextInput placeholder='Edad' 
           keyboardType='numeric' 
           style={styles.input}
+          onChange={(e)=>setEdad(e.nativeEvent.text)}
           />
           <TextInput placeholder='Peso' 
           keyboardType='numeric' 
           style={styles.input}
+          onChange={(e)=>setPeso(e.nativeEvent.text)}
           />
           <TextInput placeholder='Altura' 
           keyboardType='numeric' 
           style={[styles.input]}
+          onChange={(e)=>setAltura(e.nativeEvent.text)}
           />
       </View>
     </View>

@@ -1,23 +1,21 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import colors from '../src/utils/colors'
 
 export default function Results(props) {
-    const {errorM, total, capital, interes, meses} = props
-    console.log({errorM})
+    const {route} = props
+    console.log(props)
     return (
         <View style={styles.content}>
-            {total &&(
+            {icm &&(
                 <View style={styles.results}>
-                    <Text style={styles.title}>RESUMEN</Text>
+                    <Text style={styles.title}>Cálculos</Text>
                     <View style={styles.values}>
-                        <Text>Cantidad solicitada</Text>
-                        <Text>{capital}</Text>
+                        <Text>Hola, {route.params.nombre} tienes {route.params.edad} años y tu IMC es: {route.params.icm} </Text>
                     </View>
                 </View>
             )}
             <View>
-                <Text style={styles.errorM}>{errorM}</Text>
+                <Text style={styles.errorM}>{route.params.error}</Text>
             </View>
 
         </View>

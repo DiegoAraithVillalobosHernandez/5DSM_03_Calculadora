@@ -1,33 +1,35 @@
 import React,{ useState } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, StatusBar, Button, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, StatusBar, TouchableOpacity } from 'react-native';
 import Form from '../../components/Form'
 
-export default function Index() {
+export default function Index(props) {
+  const {navigation} = props;
   //useStateSnippet
-  const [capital, setCapital] = useState(null);
-  const [interes, setInteres] = useState(null);
-  const [meses, setMeses] = useState(null);
-  const [total, setTotal] = useState(null)
-  const [errorM, setErrorM] = useState(null)
+  const [nombre, setNombre] = useState(null);
+  const [edad, setEdad] = useState(null);
+  const [peso, setPeso] = useState(null);
+  const [altura, setAltura] = useState(null)
+  const [icm, setICM] = useState(null)
+  const [error, setError] = useState(null)
 
-  const calcular = () =>{
-    reset()
-    // console.log("cap -> "+capital+ ", int -> "+interes+", mes -> "+meses);
-    if (!capital || !interes || !meses) {
-      setErrorM("Hay campos vacíos!")
+  const calcular = async () =>{
+    if (!nombre || !edad || !peso || !altura) {
+      await setError("Hay campos vacíos!")
     }else{
-      const inte = interes/100;
-      const pays = capital/((1-Math.pow(inte+1, -meses))/inte)
-      setTotal({
-        pagoMes: pays.toFixed(2),
-        pagoTotal: (pays*meses).toFixed(2)
-      })
+      const total = peso/(Math.pow(altura,2));
+      await setICM(total.toFixed(2));
     }
+    navigate()
   }
-
-  const reset = () =>{
-    setErrorM(''),
-    setTotal(null)
+  
+  const navigate = () =>{
+    console.log({icm}, {error})
+    // navigation.navigate("results", {
+    //   error: {error},
+    //   icm: {icm},
+    //   edad: {edad},
+    //   nombre: {nombre}
+    // })
   }
 
   return (
@@ -37,12 +39,13 @@ export default function Index() {
       <View style={styles.background}></View>
       <Text style={styles.titleApp}>Calculadora IMC</Text>
       <Form
-      setCapital={setCapital}
-      setInteres={setInteres}
-      setMeses = {setMeses}/>
+      setNombre={setNombre}
+      setEdad={setEdad}
+      setPeso = {setPeso}
+      setAltura = {setAltura}/>
     </SafeAreaView>
     <View style={styles.footer}>
-        <TouchableOpacity style={styles.buttonCal} >
+        <TouchableOpacity style={styles.buttonCal} onPress={calcular}>
           <Text style={styles.calculate}>Calcular</Text>
         </TouchableOpacity>
       </View>

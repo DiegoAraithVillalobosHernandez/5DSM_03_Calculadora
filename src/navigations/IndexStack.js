@@ -3,7 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Index from "../screens/Index";
 import { Icon } from "react-native-elements";
 import { NavigationContainer } from '@react-navigation/native';
-import { color } from 'react-native-reanimated';
+import Results from "../screens/Results"
 
 const Stack = createStackNavigator();
 
@@ -22,12 +22,25 @@ export default function IndexStack() {
                 type="material-community" 
                 name="home" 
                 size={29} 
-                color={"white"} 
+                color={"black"} 
                 />
-            ),
-            headerStyle: {
-              backgroundColor: "black",
-            },
+            )
+          }}
+        />
+        <Stack.Screen
+          name="results"
+          component={Results}
+          options={{ 
+            title: "Resultado ICM",
+            headerLeft:( () => 
+              <Icon
+                onPress={() => navigation.openDrawer()} 
+                type="material-community" 
+                name="weight-lifter" 
+                size={29} 
+                color={"black"} 
+                />
+            )
           }}
         />
       </Stack.Navigator>
